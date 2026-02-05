@@ -100,6 +100,13 @@ Click the image to watch MiroFish's deep prediction of the lost ending based on 
 
 #### 1. Configure Environment Variables
 
+**Recommended: Easy Setup (Interactive)**
+```bash
+npm run easy
+```
+
+Or manual configuration:
+
 ```bash
 # Copy the example configuration file
 cp .env.example .env
