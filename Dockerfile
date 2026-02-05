@@ -23,6 +23,9 @@ RUN npm ci \
 # 复制项目源码
 COPY . .
 
+RUN useradd -m appuser && chown -R appuser:appuser /app
+USER appuser
+
 EXPOSE 3000 5001
 
 # 同时启动前后端（开发模式）

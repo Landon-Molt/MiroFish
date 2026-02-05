@@ -40,7 +40,7 @@ def create_app(config_class=Config):
         logger.info("=" * 50)
     
     # 启用CORS
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app, resources={r"/api/*": {"origins": os.environ.get("CORS_ORIGINS", "http://localhost:3000").split(",")}})
     
     # 注册模拟进程清理函数（确保服务器关闭时终止所有模拟进程）
     from .services.simulation_runner import SimulationRunner
@@ -54,7 +54,11 @@ def create_app(config_class=Config):
         logger = get_logger('mirofish.request')
         logger.debug(f"请求: {request.method} {request.path}")
         if request.content_type and 'json' in request.content_type:
-            logger.debug(f"请求体: {request.get_json(silent=True)}")
+            body = request.get_json(silent=True)
+            if body:
+                # Sanitize sensitive fields
+                sanitized = {k: ('***' if any(s in k.lower() for s in ['key', 'secret', 'token', 'password']) else v) for k, v in body.items()}
+                logger.debug(f"请求体: {sanitized}")
     
     @app.after_request
     def log_response(response):

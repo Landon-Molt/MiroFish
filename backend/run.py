@@ -43,6 +43,8 @@ def main():
     debug = Config.DEBUG
     
     # 启动服务
+    # NOTE: For production, use a WSGI server like Gunicorn:
+    # gunicorn -w 4 -b 0.0.0.0:5001 "app:create_app()"
     app.run(host=host, port=port, debug=debug, threaded=True)
 
 

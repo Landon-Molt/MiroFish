@@ -249,11 +249,10 @@ def generate_ontology():
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e),
-            "traceback": traceback.format_exc()
-        }), 500
+        response = {"success": False, "error": str(e)}
+        if Config.DEBUG:
+            response["traceback"] = traceback.format_exc()
+        return jsonify(response), 500
 
 
 # ============== 接口2：构建图谱 ==============
@@ -519,11 +518,10 @@ def build_graph():
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e),
-            "traceback": traceback.format_exc()
-        }), 500
+        response = {"success": False, "error": str(e)}
+        if Config.DEBUG:
+            response["traceback"] = traceback.format_exc()
+        return jsonify(response), 500
 
 
 # ============== 任务查询接口 ==============
@@ -584,11 +582,10 @@ def get_graph_data(graph_id: str):
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e),
-            "traceback": traceback.format_exc()
-        }), 500
+        response = {"success": False, "error": str(e)}
+        if Config.DEBUG:
+            response["traceback"] = traceback.format_exc()
+        return jsonify(response), 500
 
 
 @graph_bp.route('/delete/<graph_id>', methods=['DELETE'])
@@ -612,8 +609,7 @@ def delete_graph(graph_id: str):
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e),
-            "traceback": traceback.format_exc()
-        }), 500
+        response = {"success": False, "error": str(e)}
+        if Config.DEBUG:
+            response["traceback"] = traceback.format_exc()
+        return jsonify(response), 500
