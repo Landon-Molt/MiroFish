@@ -216,14 +216,17 @@ class OntologyGenerator:
     ) -> str:
         """构建用户消息"""
         
-        # 合并文本
-        combined_text = "\n\n---\n\n".join(document_texts)
-        original_length = len(combined_text)
-        
-        # 如果文本超过5万字，截断（仅影响传给LLM的内容，不影响图谱构建）
-        if len(combined_text) > self.MAX_TEXT_LENGTH_FOR_LLM:
-            combined_text = combined_text[:self.MAX_TEXT_LENGTH_FOR_LLM]
-            combined_text += f"\n\n...(原文共{original_length}字，已截取前{self.MAX_TEXT_LENGTH_FOR_LLM}字用于本体分析)..."
+        if not document_texts:
+            combined_text = "(用户未提供文档，仅依据模拟需求进行分析)"
+        else:
+            # 合并文本
+            combined_text = "\n\n---\n\n".join(document_texts)
+            original_length = len(combined_text)
+            
+            # 如果文本超过5万字，截断（仅影响传给LLM的内容，不影响图谱构建）
+            if len(combined_text) > self.MAX_TEXT_LENGTH_FOR_LLM:
+                combined_text = combined_text[:self.MAX_TEXT_LENGTH_FOR_LLM]
+                combined_text += f"\n\n...(原文共{original_length}字，已截取前{self.MAX_TEXT_LENGTH_FOR_LLM}字用于本体分析)..."
         
         message = f"""## 模拟需求
 

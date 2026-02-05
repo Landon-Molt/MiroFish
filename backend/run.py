@@ -27,11 +27,10 @@ def main():
     # 验证配置
     errors = Config.validate()
     if errors:
-        print("配置错误 / Configuration Error:")
+        print("配置错误:")
         for err in errors:
             print(f"  - {err}")
-        print("\n请检查 .env 文件中的配置 / Please check .env file")
-        print("Tip: Run 'npm run easy' to setup configuration automatically.")
+        print("\n请检查 .env 文件中的配置")
         sys.exit(1)
     
     # 创建应用

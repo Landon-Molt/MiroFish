@@ -165,11 +165,12 @@ def generate_ontology():
         
         # 获取上传的文件
         uploaded_files = request.files.getlist('files')
-        if not uploaded_files or all(not f.filename for f in uploaded_files):
-            return jsonify({
-                "success": False,
-                "error": "请至少上传一个文档文件"
-            }), 400
+        if not uploaded_files:
+            # 允许无文件上传，仅基于prompt生成
+            pass
+        elif all(not f.filename for f in uploaded_files):
+            # 如果上传了文件列表但都是空的，忽略
+            pass
         
         # 创建项目
         project = ProjectManager.create_project(name=project_name)
@@ -199,7 +200,8 @@ def generate_ontology():
                 document_texts.append(text)
                 all_text += f"\n\n=== {file_info['original_filename']} ===\n{text}"
         
-        if not document_texts:
+        if not document_texts and uploaded_files and any(f.filename for f in uploaded_files):
+            # 如果用户尝试上传了文件但解析失败
             ProjectManager.delete_project(project.project_id)
             return jsonify({
                 "success": False,

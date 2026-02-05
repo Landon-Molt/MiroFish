@@ -568,7 +568,7 @@ const initProject = async () => {
 const handleNewProject = async () => {
   const pending = getPendingUpload()
   
-  if (!pending.isPending || pending.files.length === 0) {
+  if (!pending.isPending) {
     error.value = '没有待上传的文件，请返回首页重新操作'
     loading.value = false
     return
