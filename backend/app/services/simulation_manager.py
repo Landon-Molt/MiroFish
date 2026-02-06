@@ -312,7 +312,13 @@ class SimulationManager:
                 )
             
             # 传入graph_id以启用Zep检索功能，获取更丰富的上下文
-            generator = OasisProfileGenerator(graph_id=state.graph_id)
+            # 使用 FAST 配置 (Stage 1)
+            generator = OasisProfileGenerator(
+                graph_id=state.graph_id,
+                api_key=Config.LLM_FAST_API_KEY,
+                base_url=Config.LLM_FAST_BASE_URL,
+                model_name=Config.LLM_FAST_MODEL_NAME
+            )
             
             def profile_progress(current, total, msg):
                 if progress_callback:
@@ -389,7 +395,12 @@ class SimulationManager:
                     total=3
                 )
             
-            config_generator = SimulationConfigGenerator()
+            # 使用 FAST 配置 (Stage 1)
+            config_generator = SimulationConfigGenerator(
+                api_key=Config.LLM_FAST_API_KEY,
+                base_url=Config.LLM_FAST_BASE_URL,
+                model_name=Config.LLM_FAST_MODEL_NAME
+            )
             
             if progress_callback:
                 progress_callback(

@@ -15,6 +15,7 @@ from ..services.simulation_manager import SimulationManager
 from ..models.project import ProjectManager
 from ..models.task import TaskManager, TaskStatus
 from ..utils.logger import get_logger
+from ..utils.llm_client import LLMClient
 
 logger = get_logger('mirofish.api.report')
 
@@ -130,11 +131,19 @@ def generate_report():
                     message="初始化Report Agent..."
                 )
                 
+                # 使用 SMART 配置初始化 LLM Client (Stage 2)
+                llm_client = LLMClient(
+                    api_key=Config.LLM_SMART_API_KEY,
+                    base_url=Config.LLM_SMART_BASE_URL,
+                    model=Config.LLM_SMART_MODEL_NAME
+                )
+
                 # 创建Report Agent
                 agent = ReportAgent(
                     graph_id=graph_id,
                     simulation_id=simulation_id,
-                    simulation_requirement=simulation_requirement
+                    simulation_requirement=simulation_requirement,
+                    llm_client=llm_client
                 )
                 
                 # 进度回调

@@ -31,6 +31,16 @@ class Config:
     LLM_API_KEY = os.environ.get('LLM_API_KEY')
     LLM_BASE_URL = os.environ.get('LLM_BASE_URL', 'https://api.openai.com/v1')
     LLM_MODEL_NAME = os.environ.get('LLM_MODEL_NAME', 'gpt-4o-mini')
+
+    # Stage 1: Graph & Simulation (Fast/Cheap) - Defaults to main config if not set
+    LLM_FAST_API_KEY = os.environ.get('LLM_FAST_API_KEY') or LLM_API_KEY
+    LLM_FAST_BASE_URL = os.environ.get('LLM_FAST_BASE_URL') or LLM_BASE_URL
+    LLM_FAST_MODEL_NAME = os.environ.get('LLM_FAST_MODEL_NAME') or LLM_MODEL_NAME
+
+    # Stage 2: Reporting (Smart/Deep) - Defaults to main config if not set
+    LLM_SMART_API_KEY = os.environ.get('LLM_SMART_API_KEY') or LLM_API_KEY
+    LLM_SMART_BASE_URL = os.environ.get('LLM_SMART_BASE_URL') or LLM_BASE_URL
+    LLM_SMART_MODEL_NAME = os.environ.get('LLM_SMART_MODEL_NAME') or LLM_MODEL_NAME
     
     # Zep配置
     ZEP_API_KEY = os.environ.get('ZEP_API_KEY')

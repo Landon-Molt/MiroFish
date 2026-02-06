@@ -15,6 +15,7 @@ from ..services.graph_builder import GraphBuilderService
 from ..services.text_processor import TextProcessor
 from ..utils.file_parser import FileParser
 from ..utils.logger import get_logger
+from ..utils.llm_client import LLMClient
 from ..models.task import TaskManager, TaskStatus
 from ..models.project import ProjectManager, ProjectStatus
 
@@ -215,7 +216,15 @@ def generate_ontology():
         
         # 生成本体
         logger.info("调用 LLM 生成本体定义...")
-        generator = OntologyGenerator()
+        
+        # 使用 FAST 配置初始化 LLM Client
+        llm_client = LLMClient(
+            api_key=Config.LLM_FAST_API_KEY,
+            base_url=Config.LLM_FAST_BASE_URL,
+            model=Config.LLM_FAST_MODEL_NAME
+        )
+        
+        generator = OntologyGenerator(llm_client=llm_client)
         ontology = generator.generate(
             document_texts=document_texts,
             simulation_requirement=simulation_requirement,
