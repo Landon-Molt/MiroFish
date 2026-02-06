@@ -133,24 +133,24 @@ ZEP_API_KEY=your_zep_api_key
 
 ```bash
 # One-click installation of all dependencies (root + frontend + backend)
-npm run setup:all
+bun run setup:all
 ```
 
 Or install step by step:
 
 ```bash
 # Install Node dependencies (root + frontend)
-npm run setup
+bun run setup
 
 # Install Python dependencies (backend, auto-creates virtual environment)
-npm run setup:backend
+bun run setup:backend
 ```
 
 #### 3. Start Services
 
 ```bash
 # Start both frontend and backend (run from project root)
-npm run dev
+bun run dev
 ```
 
 **Service URLs:**
@@ -160,8 +160,8 @@ npm run dev
 **Start Individually:**
 
 ```bash
-npm run backend   # Start backend only
-npm run frontend  # Start frontend only
+bun run backend   # Start backend only
+bun run frontend  # Start frontend only
 ```
 
 ### Option 2: Docker Deployment

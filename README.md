@@ -133,24 +133,24 @@ ZEP_API_KEY=your_zep_api_key
 
 ```bash
 # 一键安装所有依赖（根目录 + 前端 + 后端）
-npm run setup:all
+bun run setup:all
 ```
 
 或者分步安装：
 
 ```bash
 # 安装 Node 依赖（根目录 + 前端）
-npm run setup
+bun run setup
 
 # 安装 Python 依赖（后端，自动创建虚拟环境）
-npm run setup:backend
+bun run setup:backend
 ```
 
 #### 3. 启动服务
 
 ```bash
 # 同时启动前后端（在项目根目录执行）
-npm run dev
+bun run dev
 ```
 
 **服务地址：**
@@ -160,8 +160,8 @@ npm run dev
 **单独启动：**
 
 ```bash
-npm run backend   # 仅启动后端
-npm run frontend  # 仅启动前端
+bun run backend   # 仅启动后端
+bun run frontend  # 仅启动前端
 ```
 
 ### 二、Docker 部署

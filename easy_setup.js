@@ -100,13 +100,13 @@ async function main() {
 
     console.log(`${cyan}Installing dependencies...${reset}`);
     
-    // Root npm install
-    console.log(`${yellow}Installing root dependencies...${reset}`);
-    await runCommand('npm', ['install'], __dirname);
+    // Root install
+    console.log(`${yellow}Installing root dependencies (bun)...${reset}`);
+    await runCommand('bun', ['install'], __dirname);
 
-    // Frontend npm install
-    console.log(`${yellow}Installing frontend dependencies...${reset}`);
-    await runCommand('npm', ['install'], path.join(__dirname, 'frontend'));
+    // Frontend install
+    console.log(`${yellow}Installing frontend dependencies (bun)...${reset}`);
+    await runCommand('bun', ['install'], path.join(__dirname, 'frontend'));
 
     // Backend setup
     console.log(`${yellow}Setting up backend (using uv)...${reset}`);
@@ -127,7 +127,7 @@ async function main() {
     }
 
     console.log(`${green}\n✨ Setup complete! ✨${reset}`);
-    console.log(`Run the app with: ${cyan}npm run dev${reset}`);
+    console.log(`Run the app with: ${cyan}bun run dev${reset}`);
 
   } catch (error) {
     console.error(`${reset}\n❌ Error: ${error.message}`);
